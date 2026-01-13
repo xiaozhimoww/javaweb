@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace对应Mapper接口全类名 -->
+<mapper namespace="jmu.ccz.fs.mapper.CustomerMapper">
+    <!-- 定义结果集映射（字段名与实体类属性名对应，若一致可省略，此处为规范演示） -->
+    <resultMap id="CustomerResultMap" type="jmu.ccz.fs.pojo.Customer">
+        <id column="c_id" property="cId"/>
+        <result column="c_username" property="cUsername"/>
+        <result column="c_password" property="cPassword"/>
+        <result column="c_name" property="cName"/>
+        <result column="c_phone" property="cPhone"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <!-- 实现selectCustomerByUsername方法 -->
+    <select id="selectCustomerByUsername" parameterType="string" resultMap="CustomerResultMap">
+        SELECT c_id, c_username, c_password, c_name, c_phone, create_time, update_time
+        FROM customer
+        WHERE c_username = #{cUsername}
+    </select>
+</mapper>
